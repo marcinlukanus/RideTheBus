@@ -76,7 +76,6 @@ export default {
             {},
             {},
         ],
-        gameStarted: false,
     }),
     methods: {
         flipCard(cardNum) {
@@ -98,7 +97,6 @@ export default {
             }
         },
         async startGame() {
-            this.gameStarted = true
             await axios
                 .get('https://deckofcardsapi.com/api/deck/new/draw/?count=4')
                 .then(response => {
@@ -111,7 +109,6 @@ export default {
                     console.log(error)
                 })
             this.cardOneFlipped = this.cardTwoFlipped = this.cardThreeFlipped = this.cardFourFlipped = false
-            console.log(this.cards)
         }
     },
 }
