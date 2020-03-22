@@ -1,11 +1,15 @@
 <template>
     <div class="container">
-        <b-button 
-            v-on:click="startGame()"
-            variant="success"
-        >
-            Draw Cards
-        </b-button>
+        <div class="row justify-content-center">
+            <b-button 
+                v-on:click="startGame()"
+                variant="success"
+                class="mr-3"
+            >
+                Draw Cards
+            </b-button>
+            <RulesModal class="ml-3" />
+        </div>
         <div class="row justify-content-center mt-3">
             <PlayingCard 
                 v-if="!cardOneFlipped"
@@ -53,11 +57,13 @@
 
 <script>
 import PlayingCard from './PlayingCard.vue'
+import RulesModal from './RulesModal.vue'
 import axios from 'axios'
 
 export default {
     components: {
-        PlayingCard
+        PlayingCard,
+        RulesModal
     },
     data: () => ({
         cardOneFlipped: false,
