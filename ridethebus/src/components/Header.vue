@@ -2,7 +2,7 @@
   <div class="hello">
     <h1>{{ msg }}</h1>
     <p>
-      A drinking game created by Marcin Lukanus.<br>
+      A single-player drinking game created by Marcin Lukanus.<br>
       <a href="https://github.com/marcinlukanus/RideTheBus" target="_blank" rel="noopener">GitHub Repo</a>
     </p>
   </div>
