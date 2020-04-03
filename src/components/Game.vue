@@ -65,6 +65,9 @@ export default {
         PlayingCard,
         RulesModal
     },
+    created() {
+        this.startGame()
+    },
     data: () => ({
         cardOneFlipped: false,
         cardTwoFlipped: false,

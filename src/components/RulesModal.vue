@@ -3,8 +3,7 @@
         <b-button v-b-modal.modal-1 variant="secondary">Rules</b-button>
 
         <b-modal id="modal-1" title="Rules">
-            <p><i>Note: You must click Draw Cards in order to start flipping cards.</i></p>
-            <p><i>Other Note: You use a fresh deck everytime you restart. No counting cards!</i></p>
+            <p><i>Note: You use a fresh deck everytime you restart. No counting cards!</i></p>
             <p>Each number represents the card you're picking. The number in the brackets signifies amount of time to drink for incorrect guess for that card.</p>
             <ol class="my-2">
                 <li>Pick the color (<strong>RED</strong> or <strong>BLACK</strong>) [2]</li>
