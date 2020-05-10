@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <title>Reee</title>
     <Header msg="Welcome to RideTheBus!"/>
     <Game />
   </div>
