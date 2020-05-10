@@ -2,7 +2,12 @@
     <div>
         <b-button v-b-modal.modal-1 variant="secondary">Rules</b-button>
 
-        <b-modal id="modal-1" title="Rules">
+        <b-modal
+            ok-only
+            ok-variant="success"
+            id="modal-1" 
+            title="Rules"
+        >
             <p><i>Note: You use a fresh deck everytime you restart. No counting cards!</i></p>
             <p>Each number represents the card you're picking. The number in the brackets signifies amount of time to drink for incorrect guess for that card.</p>
             <ol class="my-2">
