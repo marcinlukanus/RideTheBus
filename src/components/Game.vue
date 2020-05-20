@@ -9,6 +9,15 @@
                 Draw Cards
             </b-button>
             <RulesModal class="ml-3" />
+            <toggle-button 
+                class="justify-content-center ml-4 mt-2"
+                @change="helpText = $event.value"
+                :color="{checked: '#28a745', unchecked: '#6c757d'}"
+                :height="22"
+                :margin="5"
+                :width="90"
+                :labels="{checked: 'Help text on', unchecked: 'Help text off'}"
+            />
         </div>
         <div class="row justify-content-center mt-3">
             <b-container>
@@ -22,6 +31,7 @@
                             v-else
                             v-bind:imgsrc=cards[0].image
                         />
+                        <p v-if="helpText">Red or Black</p>
                     </b-col>
                     <b-col>
                         <PlayingCard 
@@ -32,6 +42,7 @@
                             v-else
                             v-bind:imgsrc=cards[1].image
                         />
+                        <p v-if="helpText">Higher, Lower, or Same</p>
                     </b-col>
                     <b-col>
                         <PlayingCard 
@@ -42,6 +53,7 @@
                             v-else
                             v-bind:imgsrc=cards[2].image
                         />
+                        <p v-if="helpText">Inside, Outside, or Same</p>
                     </b-col>
                     <b-col>
                         <PlayingCard 
@@ -52,6 +64,7 @@
                             v-else
                             v-bind:imgsrc=cards[3].image
                         />
+                        <p v-if="helpText">Spades, Clubs, Hearts, or Diamonds</p>
                     </b-col>
                 </b-row>
             </b-container>
@@ -67,7 +80,7 @@ import axios from 'axios'
 export default {
     components: {
         PlayingCard,
-        RulesModal
+        RulesModal,
     },
     created() {
         this.startGame()
@@ -83,6 +96,7 @@ export default {
             {},
             {},
         ],
+        helpText: false,
     }),
     methods: {
         flipCard(cardNum) {
