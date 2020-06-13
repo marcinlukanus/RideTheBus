@@ -17,7 +17,7 @@
                 :margin="5"
                 :width="90"
                 :labels="{checked: 'Help text on', unchecked: 'Help text off'}"
-            />
+            /> 
         </div>
         <div flex-wrap="nowrap" class="row d-flex nowrap mt-3">
             <b-container>
@@ -67,6 +67,9 @@
                         <p v-if="helpText">Spades, Clubs, Hearts, or Diamonds</p>
                     </b-col>
                 </b-row>
+                <b-row class="justify-content-center mt-3">
+                    <p>Times redrawn: {{score}}</p>
+                </b-row>
             </b-container>
         </div>
     </div>
@@ -97,6 +100,7 @@ export default {
             {},
         ],
         helpText: false,
+        score: -1,
     }),
     methods: {
         flipCard(cardNum) {
@@ -130,6 +134,7 @@ export default {
                     console.log(error)
                 })
             this.cardOneFlipped = this.cardTwoFlipped = this.cardThreeFlipped = this.cardFourFlipped = false
+            this.score++
         }
     },
 }
