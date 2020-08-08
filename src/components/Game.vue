@@ -19,7 +19,12 @@
                 :labels="{checked: 'Help text on', unchecked: 'Help text off'}"
             /> 
         </div>
-        <div flex-wrap="nowrap" class="row d-flex nowrap mt-3">
+        <div 
+            flex-wrap="nowrap" 
+            class="row d-flex nowrap mt-3" 
+            justify-content="space-between" 
+            width="100vw"
+        >
             <b-container>
                 <b-row>
                     <b-col>
