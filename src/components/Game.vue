@@ -20,7 +20,7 @@
             /> 
         </div>
         <div 
-            class="row d-flex mt-3 cards"
+            class="mt-3 cards"
         >
             <b-container>
                 <b-row>
