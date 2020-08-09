@@ -20,10 +20,7 @@
             /> 
         </div>
         <div 
-            flex-wrap="nowrap" 
-            class="row d-flex nowrap mt-3" 
-            justify-content="space-between" 
-            width="100vw"
+            class="row d-flex mt-3 cards"
         >
             <b-container>
                 <b-row>
@@ -144,3 +141,10 @@ export default {
     },
 }
 </script>
+
+<style scoped lang="sass">
+    .cards
+        flex-wrap: "nowrap" 
+        justify-content: "space-between" 
+        width: "100vw"
+</style>
