@@ -20,7 +20,7 @@
             /> 
         </div>
         <div 
-            class="mt-3 cards"
+            class="cards mt-3"
         >
             <b-container>
                 <b-row>
@@ -143,8 +143,7 @@ export default {
 </script>
 
 <style scoped lang="sass">
-    .cards
-        flex-wrap: "nowrap" 
-        justify-content: "space-between" 
-        width: "100vw"
+    .cards 
+        flex-wrap: nowrap
+        justify-content: space-between
 </style>
