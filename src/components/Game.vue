@@ -74,16 +74,19 @@
                 </b-row>
             </b-container>
         </div>
+        <AppDownloads />
     </div>
 </template>
 
 <script>
+import AppDownloads from './AppDownloads'
 import PlayingCard from './PlayingCard.vue'
 import RulesModal from './RulesModal.vue'
 import axios from 'axios'
 
 export default {
     components: {
+        AppDownloads,
         PlayingCard,
         RulesModal,
     },
