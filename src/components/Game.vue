@@ -69,8 +69,17 @@
                         <p v-if="helpText">Spades, Clubs, Hearts, or Diamonds</p>
                     </b-col>
                 </b-row>
+                <b-row class="justify-content-center">
+                    <b-button class="m-2" variant="light">Red</b-button>
+                    <b-button class="m-2" variant="light">Black</b-button>
+                    <b-button class="m-2" variant="light">Red</b-button>
+                    <b-button class="m-2" variant="light">Black</b-button>
+                </b-row>
                 <b-row class="justify-content-center mt-3">
                     <p>Times redrawn: {{score}}</p>
+                </b-row>
+                <b-row class="justify-content-center mt-3">
+                    <p>Round: {{ round }}</p>
                 </b-row>
             </b-container>
         </div>
@@ -102,6 +111,7 @@ export default {
             {},
         ],
         helpText: false,
+        round: 1,
         score: -1,
     }),
     methods: {
@@ -122,6 +132,7 @@ export default {
                 default:
                     break
             }
+            this.round < 4 ? this.round++ : this.round = 'You win!';
         },
         async startGame() {
             await axios
