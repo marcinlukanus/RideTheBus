@@ -25,21 +25,35 @@
             <b-container>
                 <b-row>
                     <b-col>
-                        <PlayingCard 
+                        <div 
                             v-if="!cardOneFlipped"
-                            v-on:click.native="flipCard(0)"
-                        />
+                        >
+                            <PlayingCard
+                                v-on:click.native="flipCard(0)"
+                            />
+                            <b-button class="m-2" variant="light">Red</b-button>
+                            <b-button class="m-2" variant="light">Black</b-button>
+                        </div>
+                        
                         <PlayingCard 
                             v-else
                             v-bind:imgsrc=cards[0].image
                         />
+                        
                         <p v-if="helpText">Red or Black</p>
                     </b-col>
                     <b-col>
-                        <PlayingCard 
+                        <div 
                             v-if="!cardTwoFlipped"
-                            v-on:click.native="flipCard(1)"
-                        />
+                        >
+                            <PlayingCard 
+                                v-on:click.native="flipCard(1)"
+                            />
+                            <b-button class="m-2" variant="light">Higher</b-button>
+                            <b-button class="m-2" variant="light">Lower</b-button>
+                            <b-button class="m-2" variant="light">Same</b-button>
+                        </div>
+                        
                         <PlayingCard 
                             v-else
                             v-bind:imgsrc=cards[1].image
@@ -47,10 +61,16 @@
                         <p v-if="helpText">Higher, Lower, or Same</p>
                     </b-col>
                     <b-col>
-                        <PlayingCard 
+                        <div 
                             v-if="!cardThreeFlipped"
-                            v-on:click.native="flipCard(2)"
-                        />
+                        >
+                            <PlayingCard
+                                v-on:click.native="flipCard(2)"
+                            />
+                            <b-button class="m-2" variant="light">Inside</b-button>
+                            <b-button class="m-2" variant="light">Outside</b-button>
+                            <b-button class="m-2" variant="light">Same</b-button>
+                        </div>
                         <PlayingCard 
                             v-else
                             v-bind:imgsrc=cards[2].image
@@ -58,22 +78,23 @@
                         <p v-if="helpText">Inside, Outside, or Same</p>
                     </b-col>
                     <b-col>
-                        <PlayingCard 
+                        <div 
                             v-if="!cardFourFlipped"
-                            v-on:click.native="flipCard(3)"
-                        />
+                        >
+                            <PlayingCard 
+                                v-on:click.native="flipCard(3)"
+                            />
+                            <b-button class="m-2" variant="light">Hearts</b-button>
+                            <b-button class="m-2" variant="light">Diamonds</b-button>
+                            <b-button class="m-2" variant="light">Clubs</b-button>
+                            <b-button class="m-2" variant="light">Spade</b-button>
+                        </div>
                         <PlayingCard 
                             v-else
                             v-bind:imgsrc=cards[3].image
                         />
                         <p v-if="helpText">Spades, Clubs, Hearts, or Diamonds</p>
                     </b-col>
-                </b-row>
-                <b-row class="justify-content-center">
-                    <b-button class="m-2" variant="light">Red</b-button>
-                    <b-button class="m-2" variant="light">Black</b-button>
-                    <b-button class="m-2" variant="light">Red</b-button>
-                    <b-button class="m-2" variant="light">Black</b-button>
                 </b-row>
                 <b-row class="justify-content-center mt-3">
                     <p>Times redrawn: {{score}}</p>
