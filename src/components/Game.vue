@@ -138,13 +138,19 @@ export default {
                     this.cardOneFlipped = true
                     break
                 case 1:
-                    this.cardTwoFlipped = true
+                    if (this.cardOneFlipped) {
+                        this.cardTwoFlipped = true
+                    }
                     break
                 case 2:
-                    this.cardThreeFlipped = true
+                    if (this.cardOneFlipped && this.cardTwoFlipped) {
+                        this.cardThreeFlipped = true
+                    }
                     break
                 case 3:
-                    this.cardFourFlipped = true
+                    if (this.cardOneFlipped && this.cardTwoFlipped && this.cardThreeFlipped) {
+                        this.cardFourFlipped = true
+                    }
                     break
                 default:
                     break
