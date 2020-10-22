@@ -92,7 +92,7 @@
                         >
                             <PlayingCard />
                             <div
-                                v-if="!lost"
+                                v-if="cardOneFlipped && cardTwoFlipped && cardThreeFlipped && !lost"
                             >
                                 <b-button class="m-2" variant="light" @click="finalRound('hearts')">Hearts</b-button>
                                 <b-button class="m-2" variant="light" @click="finalRound('diamonds')">Diamonds</b-button>
@@ -227,7 +227,6 @@ export default {
             }
         },
         convertToNumber(card) {
-            console.log(card, this.cards[card].value)
             switch (this.cards[card].value) {
                 case 'ACE':
                     return 14
