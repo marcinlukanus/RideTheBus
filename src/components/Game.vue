@@ -28,11 +28,15 @@
                         <div 
                             v-if="!cardOneFlipped"
                         >
-                            <PlayingCard
-                                v-on:click.native="flipCard(0)"
-                            />
-                            <b-button class="m-2" variant="light">Red</b-button>
-                            <b-button class="m-2" variant="light">Black</b-button>
+                            <PlayingCard />
+                            <b-button 
+                                class="m-2" 
+                                variant="light" 
+                                @click="firstRound('red')"
+                            >
+                                Red
+                            </b-button>
+                            <b-button class="m-2" variant="light" @click="firstRound('black')">Black</b-button>
                         </div>
                         
                         <PlayingCard 
@@ -46,12 +50,15 @@
                         <div 
                             v-if="!cardTwoFlipped"
                         >
-                            <PlayingCard 
-                                v-on:click.native="flipCard(1)"
-                            />
-                            <b-button class="m-2" variant="light">Higher</b-button>
-                            <b-button class="m-2" variant="light">Lower</b-button>
-                            <b-button class="m-2" variant="light">Same</b-button>
+                            <PlayingCard />
+                            <div
+                                v-if="cardOneFlipped && !lost"
+                            >
+                                <b-button class="m-2" variant="light" @click="secondRound('higher')">Higher</b-button>
+                                <b-button class="m-2" variant="light" @click="secondRound('lower')">Lower</b-button>
+                                <b-button class="m-2" variant="light" @click="secondRound('same')">Same</b-button>
+                            </div>
+                            
                         </div>
                         
                         <PlayingCard 
@@ -64,12 +71,14 @@
                         <div 
                             v-if="!cardThreeFlipped"
                         >
-                            <PlayingCard
-                                v-on:click.native="flipCard(2)"
-                            />
-                            <b-button class="m-2" variant="light">Inside</b-button>
-                            <b-button class="m-2" variant="light">Outside</b-button>
-                            <b-button class="m-2" variant="light">Same</b-button>
+                            <PlayingCard />
+                            <div
+                                v-if="cardOneFlipped && cardTwoFlipped && !lost"
+                            >
+                                <b-button class="m-2" variant="light" @click="thirdRound('inside')">Inside</b-button>
+                                <b-button class="m-2" variant="light" @click="thirdRound('outside')">Outside</b-button>
+                                <b-button class="m-2" variant="light" @click="thirdRound('same')">Same</b-button>
+                            </div>
                         </div>
                         <PlayingCard 
                             v-else
@@ -81,13 +90,15 @@
                         <div 
                             v-if="!cardFourFlipped"
                         >
-                            <PlayingCard 
-                                v-on:click.native="flipCard(3)"
-                            />
-                            <b-button class="m-2" variant="light">Hearts</b-button>
-                            <b-button class="m-2" variant="light">Diamonds</b-button>
-                            <b-button class="m-2" variant="light">Clubs</b-button>
-                            <b-button class="m-2" variant="light">Spade</b-button>
+                            <PlayingCard />
+                            <div
+                                v-if="!lost"
+                            >
+                                <b-button class="m-2" variant="light" @click="finalRound('hearts')">Hearts</b-button>
+                                <b-button class="m-2" variant="light" @click="finalRound('diamonds')">Diamonds</b-button>
+                                <b-button class="m-2" variant="light" @click="finalRound('clubs')">Clubs</b-button>
+                                <b-button class="m-2" variant="light" @click="finalRound('spades')">Spades</b-button>
+                            </div>
                         </div>
                         <PlayingCard 
                             v-else
@@ -129,6 +140,7 @@ export default {
             {},
         ],
         helpText: false,
+        lost: false,
         score: -1,
     }),
     methods: {
@@ -168,8 +180,66 @@ export default {
                 .catch(error => {
                     console.log(error)
                 })
-            this.cardOneFlipped = this.cardTwoFlipped = this.cardThreeFlipped = this.cardFourFlipped = false
+            this.cardOneFlipped = this.cardTwoFlipped = this.cardThreeFlipped = this.cardFourFlipped = this.lost = false
             this.score++
+        },
+        firstRound(color) {
+            this.cardOneFlipped = true;
+
+            if ((color === 'red' && (this.cards[0].suit === 'SPADES' || this.cards[0].suit === 'CLUBS')) ||
+                (color === 'black' && (this.cards[0].suit === 'HEARTS' || this.cards[0].suit === 'DIAMONDS'))) {
+                    this.lost = true
+            }
+        },
+        secondRound(height) {
+            this.cardTwoFlipped = true
+
+            const cardOneHeight = this.convertToNumber(0)
+            const cardTwoHeight = this.convertToNumber(1)
+            
+            if ((height === 'higher' && cardOneHeight >= cardTwoHeight) ||
+                (height === 'lower' && cardOneHeight <= cardTwoHeight) ||
+                (height === 'same' && cardOneHeight !== cardTwoHeight)) {
+                    this.lost = true
+            }
+            
+        },
+        thirdRound(location) {
+            this.cardThreeFlipped = true
+
+            const cardOneNumber = this.convertToNumber(0)
+            const cardTwoNumber = this.convertToNumber(1)
+            const cardThreeNumber = this.convertToNumber(2)
+
+            if ((location === 'inside' && ((Math.min(cardOneNumber, cardTwoNumber) >= cardThreeNumber) || (Math.max(cardOneNumber, cardTwoNumber) <= cardThreeNumber))) ||
+                (location === 'outside' && (Math.min(cardOneNumber, cardTwoNumber) <= cardThreeNumber) && (Math.max(cardOneNumber, cardTwoNumber) >= cardThreeNumber)) ||
+                (location === 'same' && cardOneNumber !== cardThreeNumber && cardTwoNumber !== cardThreeNumber)) {
+                    this.lost = true
+                }
+        },
+        finalRound(suit) {
+            this.cardFourFlipped = true
+
+            if (suit.toUpperCase() !== this.cards[3].suit) {
+                this.lost = true
+            } else {
+                console.log('You win!')
+            }
+        },
+        convertToNumber(card) {
+            console.log(card, this.cards[card].value)
+            switch (this.cards[card].value) {
+                case 'ACE':
+                    return 14
+                case 'KING':
+                    return 13
+                case 'QUEEN':
+                    return 12
+                case 'JACK':
+                    return 11
+                default:
+                    return Number(this.cards[card].value)
+            }
         }
     },
 }
