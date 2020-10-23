@@ -119,6 +119,10 @@
 import PlayingCard from './PlayingCard.vue'
 import RulesModal from './RulesModal.vue'
 import axios from 'axios'
+import VueConfetti from 'vue-confetti'
+import Vue from 'vue'
+
+Vue.use(VueConfetti)
 
 export default {
     components: {
@@ -142,7 +146,31 @@ export default {
         helpText: false,
         lost: false,
         score: -1,
+        won: false,
     }),
+    watch: {
+        lost() {
+            if (this.lost) {
+                this.$bvToast.toast('Start over!', {
+                    title: 'You got it wrong!',
+                    variant: 'danger',
+                    solid: true,
+                    toaster: 'b-toaster-bottom-center',
+                    autoHideDelay: 3000,
+                })
+            }
+        },
+        won() {
+            if (this.won) {
+                this.$bvToast.toast('You truly are the greatest!', {
+                    title: 'Congratulations',
+                    variant: 'success',
+                    solid: true,
+                    toaster: 'b-toaster-bottom-center'
+                })
+            }
+        }
+    },
     methods: {
         flipCard(cardNum) {
             switch(cardNum) {
@@ -182,6 +210,7 @@ export default {
                 })
             this.cardOneFlipped = this.cardTwoFlipped = this.cardThreeFlipped = this.cardFourFlipped = this.lost = false
             this.score++
+            this.$confetti.stop()
         },
         firstRound(color) {
             this.cardOneFlipped = true;
@@ -223,7 +252,8 @@ export default {
             if (suit.toUpperCase() !== this.cards[3].suit) {
                 this.lost = true
             } else {
-                console.log('You win!')
+                this.won = true;
+                this.$confetti.start()
             }
         },
         convertToNumber(card) {
