@@ -8,7 +8,9 @@
             >
                 Draw Cards
             </b-button>
+
             <RulesModal class="ml-3" />
+
             <toggle-button 
                 class="justify-content-center ml-4 mt-2"
                 @change="helpText = $event.value"
@@ -44,7 +46,11 @@
                             v-bind:imgsrc=cards[0].image
                         />
                         
-                        <p v-if="helpText">Red or Black</p>
+                        <p 
+                            v-if="helpText"
+                        >
+                            Red or Black
+                        </p>
                     </b-col>
                     <b-col>
                         <div 
@@ -54,9 +60,27 @@
                             <div
                                 v-if="cardOneFlipped && !lost"
                             >
-                                <b-button class="m-2" variant="light" @click="secondRound('higher')">Higher</b-button>
-                                <b-button class="m-2" variant="light" @click="secondRound('lower')">Lower</b-button>
-                                <b-button class="m-2" variant="light" @click="secondRound('same')">Same</b-button>
+                                <b-button 
+                                    class="m-2" 
+                                    variant="light" 
+                                    @click="secondRound('higher')"
+                                >
+                                    Higher
+                                </b-button>
+                                <b-button 
+                                    class="m-2" 
+                                    variant="light" 
+                                    @click="secondRound('lower')"
+                                >
+                                    Lower
+                                </b-button>
+                                <b-button 
+                                    class="m-2" 
+                                    variant="light" 
+                                    @click="secondRound('same')"
+                                >
+                                    Same
+                                </b-button>
                             </div>
                             
                         </div>
@@ -65,7 +89,11 @@
                             v-else
                             v-bind:imgsrc=cards[1].image
                         />
-                        <p v-if="helpText">Higher, Lower, or Same</p>
+                        <p 
+                            v-if="helpText"
+                        >
+                            Higher, Lower, or Same
+                        </p>
                     </b-col>
                     <b-col>
                         <div 
@@ -75,16 +103,38 @@
                             <div
                                 v-if="cardOneFlipped && cardTwoFlipped && !lost"
                             >
-                                <b-button class="m-2" variant="light" @click="thirdRound('inside')">Inside</b-button>
-                                <b-button class="m-2" variant="light" @click="thirdRound('outside')">Outside</b-button>
-                                <b-button class="m-2" variant="light" @click="thirdRound('same')">Same</b-button>
+                                <b-button 
+                                    class="m-2" 
+                                    variant="light" 
+                                    @click="thirdRound('inside')"
+                                >
+                                    Inside
+                                </b-button>
+                                <b-button 
+                                    class="m-2" 
+                                    variant="light" 
+                                    @click="thirdRound('outside')"
+                                >
+                                    Outside
+                                </b-button>
+                                <b-button 
+                                    class="m-2" 
+                                    variant="light" 
+                                    @click="thirdRound('same')"
+                                >
+                                    Same
+                                </b-button>
                             </div>
                         </div>
                         <PlayingCard 
                             v-else
                             v-bind:imgsrc=cards[2].image
                         />
-                        <p v-if="helpText">Inside, Outside, or Same</p>
+                        <p 
+                            v-if="helpText"
+                        >
+                            Inside, Outside, or Same
+                        </p>
                     </b-col>
                     <b-col>
                         <div 
@@ -94,17 +144,45 @@
                             <div
                                 v-if="cardOneFlipped && cardTwoFlipped && cardThreeFlipped && !lost"
                             >
-                                <b-button class="m-2" variant="light" @click="finalRound('hearts')">Hearts</b-button>
-                                <b-button class="m-2" variant="light" @click="finalRound('diamonds')">Diamonds</b-button>
-                                <b-button class="m-2" variant="light" @click="finalRound('clubs')">Clubs</b-button>
-                                <b-button class="m-2" variant="light" @click="finalRound('spades')">Spades</b-button>
+                                <b-button 
+                                    class="m-2" 
+                                    variant="light" 
+                                    @click="finalRound('hearts')"
+                                >
+                                    Hearts
+                                </b-button>
+                                <b-button 
+                                    class="m-2" 
+                                    variant="light" 
+                                    @click="finalRound('diamonds')"
+                                >
+                                    Diamonds
+                                </b-button>
+                                <b-button 
+                                    class="m-2" 
+                                    variant="light" 
+                                    @click="finalRound('clubs')"
+                                >
+                                    Clubs
+                                </b-button>
+                                <b-button 
+                                    class="m-2" 
+                                    variant="light" 
+                                    @click="finalRound('spades')"
+                                >
+                                    Spades
+                                </b-button>
                             </div>
                         </div>
                         <PlayingCard 
                             v-else
                             v-bind:imgsrc=cards[3].image
                         />
-                        <p v-if="helpText">Spades, Clubs, Hearts, or Diamonds</p>
+                        <p 
+                            v-if="helpText"
+                        >
+                            Spades, Clubs, Hearts, or Diamonds
+                        </p>
                     </b-col>
                 </b-row>
                 <b-row class="justify-content-center mt-3">
@@ -119,6 +197,10 @@
 import PlayingCard from './PlayingCard.vue'
 import RulesModal from './RulesModal.vue'
 import axios from 'axios'
+import VueConfetti from 'vue-confetti'
+import Vue from 'vue'
+
+Vue.use(VueConfetti)
 
 export default {
     components: {
@@ -142,7 +224,31 @@ export default {
         helpText: false,
         lost: false,
         score: -1,
+        won: false,
     }),
+    watch: {
+        lost() {
+            if (this.lost) {
+                this.$bvToast.toast('Start over!', {
+                    title: 'You got it wrong!',
+                    variant: 'danger',
+                    solid: true,
+                    toaster: 'b-toaster-bottom-center',
+                    autoHideDelay: 2000,
+                })
+            }
+        },
+        won() {
+            if (this.won) {
+                this.$bvToast.toast('You truly are the greatest!', {
+                    title: 'Congratulations',
+                    variant: 'success',
+                    solid: true,
+                    toaster: 'b-toaster-bottom-center'
+                })
+            }
+        }
+    },
     methods: {
         flipCard(cardNum) {
             switch(cardNum) {
@@ -182,6 +288,7 @@ export default {
                 })
             this.cardOneFlipped = this.cardTwoFlipped = this.cardThreeFlipped = this.cardFourFlipped = this.lost = false
             this.score++
+            this.$confetti.stop()
         },
         firstRound(color) {
             this.cardOneFlipped = true;
@@ -223,7 +330,32 @@ export default {
             if (suit.toUpperCase() !== this.cards[3].suit) {
                 this.lost = true
             } else {
-                console.log('You win!')
+                this.won = true;
+                if (this.score === 0) {
+                    this.$confetti.start({
+                        particlesPerFramne: .05,
+                        defaultDropRate: 20,
+                        windSpeedMax: 0,
+                        particles: [
+                            {
+                                type: 'image',
+                                url: 'https://cdn.jsdelivr.net/npm/twemoji@11.0.1/2/svg/1f37b.svg',
+                                size: 30
+                            },
+                        ],
+                    });
+                } else {
+                    this.$confetti.start({
+                        defaultDropRate: 5,
+                        windSpeedMax: 0,
+                        particles: [
+                            {
+                                type: 'rect'
+                            }
+                        ]
+                    });
+                }
+                
             }
         },
         convertToNumber(card) {

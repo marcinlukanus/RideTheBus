@@ -9,6 +9,7 @@
 import Header from './components/Header.vue'
 import Game from './components/Game.vue'
 
+
 export default {
   name: 'App',
   components: {
