@@ -355,7 +355,6 @@ export default {
                         ]
                     });
                 }
-                
             }
         },
         convertToNumber(card) {
