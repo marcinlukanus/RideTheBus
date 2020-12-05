@@ -277,9 +277,22 @@ export default {
                     break
             }
         },
+        checkForDuplicates(card) {
+            if (card === 0) return false
+
+            for (let i = card - 1; i >= 0; i--) {
+                if (this.cards[i].value === this.cards[card].value &&
+                    this.cards[i].suit === this.cards[card].suit) {
+                        return true
+                }
+            }
+
+            return false
+        },
         generateCards() {
             const suits = ['SPADES', 'CLUBS', 'HEARTS', 'DIAMONDS']
             const numbers = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'JACK', 'QUEEN', 'KING', 'ACE']
+
             for (let i = 0; i < this.cards.length; i++) {
                 this.cards[i].suit = suits[Math.floor(Math.random() * suits.length)]
                 // eslint-disable-next-line no-constant-condition
@@ -287,6 +300,8 @@ export default {
                 this.cards[i].value = numbers[Math.floor(Math.random() * numbers.length)]
                 let number = this.convertToString(this.cards[i].value)
                 this.cards[i].image = require(`../assets/cards/PNG/${number}${this.cards[i].suit.charAt(0)}.png`)
+
+                if (this.checkForDuplicates(i)) i--;
             }
         },
         async startGame() {
