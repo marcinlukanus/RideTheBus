@@ -196,7 +196,7 @@
 <script>
 import PlayingCard from './PlayingCard.vue'
 import RulesModal from './RulesModal.vue'
-import axios from 'axios'
+// import axios from 'axios'
 import VueConfetti from 'vue-confetti'
 import Vue from 'vue'
 
@@ -274,18 +274,31 @@ export default {
                     break
             }
         },
+        generateCards() {
+            const suits = ['SPADES', 'CLUBS', 'HEARTS', 'DIAMONDS']
+            const numbers = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'JACK', 'QUEEN', 'KING', 'ACE']
+            for (let i = 0; i < this.cards.length; i++) {
+                this.cards[i].suit = suits[Math.floor(Math.random() * suits.length)]
+                // eslint-disable-next-line no-constant-condition
+                this.cards[i].suit === 'SPADES' || 'CLUBS' ? this.cards[i].color = 'black' : this.cards[i].color = 'red'
+                this.cards[i].value = numbers[Math.floor(Math.random() * numbers.length)]
+                let number = this.convertToString(this.cards[i].value)
+                this.cards[i].image = require(`../assets/cards/PNG/${number}${this.cards[i].suit.charAt(0)}.png`)
+            }
+        },
         async startGame() {
-            await axios
-                .get('https://deckofcardsapi.com/api/deck/new/draw/?count=4')
-                .then(response => {
-                    this.cards[0] = response.data.cards[0]
-                    this.cards[1] = response.data.cards[1]
-                    this.cards[2] = response.data.cards[2]
-                    this.cards[3] = response.data.cards[3]
-                })
-                .catch(error => {
-                    console.log(error)
-                })
+            // await axios
+            //     .get('https://deckofcardsapi.com/api/deck/new/draw/?count=4')
+            //     .then(response => {
+            //         this.cards[0] = response.data.cards[0]
+            //         this.cards[1] = response.data.cards[1]
+            //         this.cards[2] = response.data.cards[2]
+            //         this.cards[3] = response.data.cards[3]
+            //     })
+            //     .catch(error => {
+            //         console.log(error)
+            //     })
+            this.generateCards();
             this.cardOneFlipped = this.cardTwoFlipped = this.cardThreeFlipped = this.cardFourFlipped = this.lost = false
             this.score++
             this.$confetti.stop()
@@ -369,6 +382,20 @@ export default {
                     return 11
                 default:
                     return Number(this.cards[card].value)
+            }
+        },
+        convertToString(cardValue) {
+            switch (cardValue) {
+                case 'ACE':
+                    return 'A'
+                case 'KING':
+                    return 'K'
+                case 'QUEEN':
+                    return 'Q'
+                case 'JACK':
+                    return 'J'
+                default:
+                    return `${cardValue}`
             }
         }
     },
