@@ -299,7 +299,7 @@ export default {
                 this.cards[i].suit === 'SPADES' || 'CLUBS' ? this.cards[i].color = 'black' : this.cards[i].color = 'red'
                 this.cards[i].value = numbers[Math.floor(Math.random() * numbers.length)]
                 let number = this.convertToString(this.cards[i].value)
-                this.cards[i].image = require(`../assets/cards/PNG/${number}${this.cards[i].suit.charAt(0)}.png`)
+                this.cards[i].image = require(`../assets/cards/PNG2/${number != 'ACE' ? number : 'ACE'}${this.cards[i].suit.charAt(0)}.png`)
 
                 if (this.checkForDuplicates(i)) i--;
             }
