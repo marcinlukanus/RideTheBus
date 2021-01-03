@@ -198,7 +198,6 @@
 import AppDownloads from './AppDownloads'
 import PlayingCard from './PlayingCard.vue'
 import RulesModal from './RulesModal.vue'
-// import axios from 'axios'
 import VueConfetti from 'vue-confetti'
 import Vue from 'vue'
 
@@ -305,17 +304,6 @@ export default {
             }
         },
         async startGame() {
-            // await axios
-            //     .get('https://deckofcardsapi.com/api/deck/new/draw/?count=4')
-            //     .then(response => {
-            //         this.cards[0] = response.data.cards[0]
-            //         this.cards[1] = response.data.cards[1]
-            //         this.cards[2] = response.data.cards[2]
-            //         this.cards[3] = response.data.cards[3]
-            //     })
-            //     .catch(error => {
-            //         console.log(error)
-            //     })
             this.generateCards();
             this.cardOneFlipped = this.cardTwoFlipped = this.cardThreeFlipped = this.cardFourFlipped = this.lost = false
             this.score++
