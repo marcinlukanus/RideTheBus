@@ -10,6 +10,7 @@
                 width=250em
             />
         </a>
+        <a href="https://www.buymeacoffee.com/ridethebus" target="_blank"><b-button class="beer-button">🍻 Buy me a beer 😳</b-button></a>
     </div>
 </template>
 
@@ -20,3 +21,19 @@ export default {
     }
 }
 </script>
+<style scoped>
+    .beer-button {
+        width: 235px;
+        height: 63px;
+        color: #fff;
+        background-color: #000000;
+        border-color: #ffffff;
+        font-size: 1.25rem;
+        text-decoration: none;
+    }
+    .beer-button:hover {
+        color: #fff;
+        background-color: #23272b;
+        border-color: #000000;
+    }
+</style>

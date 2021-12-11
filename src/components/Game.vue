@@ -190,12 +190,12 @@
                 </b-row>
             </b-container>
         </div>
-        <AppDownloads />
+        <Footer />
     </div>
 </template>
 
 <script>
-import AppDownloads from './AppDownloads'
+import Footer from './Footer'
 import PlayingCard from './PlayingCard.vue'
 import RulesModal from './RulesModal.vue'
 import VueConfetti from 'vue-confetti'
@@ -205,7 +205,7 @@ Vue.use(VueConfetti)
 
 export default {
     components: {
-        AppDownloads,
+        Footer,
         PlayingCard,
         RulesModal,
     },
