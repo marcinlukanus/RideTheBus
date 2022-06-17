@@ -50,6 +50,8 @@
                             v-if="helpText"
                         >
                             Red or Black
+                            <br />
+                            <span v-if="cardOneFlipped">{{cards[0].value + ' of ' + cards[0].suit}}</span>
                         </p>
                     </b-col>
                     <b-col>
@@ -93,6 +95,8 @@
                             v-if="helpText"
                         >
                             Higher, Lower, or Same
+                            <br />
+                            <span v-if="cardTwoFlipped">{{cards[1].value + ' of ' + cards[1].suit}}</span>
                         </p>
                     </b-col>
                     <b-col>
@@ -134,6 +138,8 @@
                             v-if="helpText"
                         >
                             Inside, Outside, or Same
+                            <br />
+                            <span v-if="cardThreeFlipped">{{cards[2].value + ' of ' + cards[2].suit}}</span>
                         </p>
                     </b-col>
                     <b-col>
@@ -182,6 +188,8 @@
                             v-if="helpText"
                         >
                             Spades, Clubs, Hearts, or Diamonds
+                            <br />
+                            <span v-if="cardFourFlipped">{{cards[3].value + ' of ' + cards[3].suit}}</span>
                         </p>
                     </b-col>
                 </b-row>
