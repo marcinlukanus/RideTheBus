@@ -18,7 +18,7 @@
                 :height="22"
                 :margin="5"
                 :width="90"
-                :labels="{checked: 'Help text on', unchecked: 'Help text off'}"
+                :labels="{checked: 'Card text on', unchecked: 'Card text off'}"
             /> 
         </div>
         <div 
@@ -47,11 +47,9 @@
                         />
                         
                         <p 
-                            v-if="helpText"
+                            v-if="helpText && cardOneFlipped"
                         >
-                            Red or Black
-                            <br />
-                            <span v-if="cardOneFlipped">{{cards[0].value + ' of ' + cards[0].suit}}</span>
+                            {{cards[0].value + ' of ' + cards[0].suit}}
                         </p>
                     </b-col>
                     <b-col>
@@ -92,11 +90,9 @@
                             v-bind:imgsrc=cards[1].image
                         />
                         <p 
-                            v-if="helpText"
+                            v-if="helpText && cardTwoFlipped"
                         >
-                            Higher, Lower, or Same
-                            <br />
-                            <span v-if="cardTwoFlipped">{{cards[1].value + ' of ' + cards[1].suit}}</span>
+                            {{cards[1].value + ' of ' + cards[1].suit}}
                         </p>
                     </b-col>
                     <b-col>
@@ -135,11 +131,9 @@
                             v-bind:imgsrc=cards[2].image
                         />
                         <p 
-                            v-if="helpText"
+                            v-if="helpText && cardThreeFlipped"
                         >
-                            Inside, Outside, or Same
-                            <br />
-                            <span v-if="cardThreeFlipped">{{cards[2].value + ' of ' + cards[2].suit}}</span>
+                            {{cards[2].value + ' of ' + cards[2].suit}}
                         </p>
                     </b-col>
                     <b-col>
@@ -185,11 +179,9 @@
                             v-bind:imgsrc=cards[3].image
                         />
                         <p 
-                            v-if="helpText"
+                            v-if="helpText && cardFourFlipped"
                         >
-                            Spades, Clubs, Hearts, or Diamonds
-                            <br />
-                            <span v-if="cardFourFlipped">{{cards[3].value + ' of ' + cards[3].suit}}</span>
+                            {{cards[3].value + ' of ' + cards[3].suit}}
                         </p>
                     </b-col>
                 </b-row>
